@@ -79,13 +79,13 @@
 
         - name: Downcase repository name
           run: |
-            echo "IMAGE_TAG=ghcr.io/${GITHUB_REPOSITORY,,}:latest" >> "$GITHUB_ENV"
+            echo "IMAGE_TAG=${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
 
         - uses: docker/build-push-action@v6
           with:
             context: .
             push: true
-            tags: '${{ env.IMAGE_TAG }}/solar-system:${{ github.sha }}' 
+            tags: 'ghcr.io/${{ env.IMAGE_TAG }}/solar-system:${{ github.sha }}' 
 
     dev-deploy:
       runs-on: ubuntu-latest 
